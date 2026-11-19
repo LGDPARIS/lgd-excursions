@@ -124,8 +124,8 @@ p{ margin:0; }
 .eb-tag{ position:absolute; top:-12px; left:16px; background:var(--sun); color:#1E1A12; font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; padding:4px 10px; border-radius:6px; }
 .eb .price{ display:flex; align-items:baseline; gap:8px; }
 .eb .price strong{ font-family:var(--serif); font-size:clamp(44px,5vw,56px); line-height:1; color:var(--navy); }
-.eb .price s{ color:#8EA49F; font-size:20px; font-weight:600; }
-.eb .price s[hidden]{ display:none; }
+.eb .price .then{ color:var(--navy); font-size:20px; font-weight:700; }
+.eb .price .then[hidden]{ display:none; }
 .eb .lbl{ font-size:14px; color:var(--muted); }
 .eb .lbl b{ display:block; color:var(--navy); font-size:16px; }
 .eb .lim{ grid-column:1 / -1; display:flex; align-items:center; gap:8px; font-size:14px; font-weight:700; color:var(--noel); }
@@ -152,9 +152,12 @@ p{ margin:0; }
 .trip-head h2{ font-family:var(--serif); font-size:clamp(22px,2.6vw,28px); color:var(--navy); }
 .trip-head span{ font-size:14px; color:var(--muted); font-weight:600; }
 .road{ position:relative; display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:10px; }
-.road::before{ content:""; position:absolute; left:10%; right:10%; top:27px; border-top:3px dashed var(--teal-line); }
-.bus{ position:absolute; top:12px; left:10%; width:34px; height:30px; color:var(--teal); animation:drive 9s ease-in-out infinite; z-index:1; }
-@keyframes drive{ 0%{ left:8%; } 46%{ left:calc(90% - 34px); } 50%{ left:calc(90% - 34px); transform:scaleX(-1); } 96%{ left:8%; transform:scaleX(-1); } 100%{ left:8%; transform:scaleX(1); } }
+.road{ padding-top:46px; }
+.road::before{ content:""; position:absolute; left:10%; right:10%; top:73px; border-top:3px dashed var(--teal-line); }
+.bus{ position:absolute; top:17px; left:8%; width:160px; height:59px; z-index:1; animation:drive 7.5s linear infinite; pointer-events:none; overflow:visible; }
+.bus .wh{ animation:spin .45s linear infinite; }
+@keyframes spin{ to{ transform:rotate(360deg); } }
+@keyframes drive{ 0%{ left:4%; opacity:0; } 6%{ opacity:1; } 88%{ opacity:1; } 96%{ left:calc(92% - 160px); opacity:0; } 100%{ left:calc(92% - 160px); opacity:0; } }
 .stop{ position:relative; z-index:2; display:flex; flex-direction:column; align-items:center; text-align:center; gap:4px; }
 .stop .pin{ width:56px; height:56px; border-radius:50%; display:grid; place-items:center; background:var(--teal-soft); color:var(--teal); border:3px solid #FFFFFF; box-shadow:0 0 0 2px var(--teal-line); margin-bottom:6px; }
 .stop.hl .pin{ background:var(--sun); color:var(--navy); box-shadow:0 0 0 2px var(--sun); }
@@ -163,9 +166,10 @@ p{ margin:0; }
 .stop .w{ font-size:14px; color:var(--muted); line-height:1.35; }
 .stop.hl .l{ color:var(--sun-d); }
 @media (max-width:760px){
-  .road{ grid-template-columns:1fr; gap:0; }
-  .road::before{ left:27px; right:auto; top:28px; bottom:28px; border-top:0; border-left:3px dashed var(--teal-line); }
-  .bus{ display:none; }
+  .road{ grid-template-columns:1fr; gap:0; padding-top:76px; }
+  .road::before{ left:27px; right:auto; top:112px; bottom:28px; border-top:0; border-left:3px dashed var(--teal-line); }
+  .bus{ width:132px; height:49px; top:11px; }
+  .road::after{ content:""; position:absolute; left:0; right:0; top:58px; border-top:3px dashed var(--teal-line); }
   .stop{ display:grid; grid-template-columns:56px auto minmax(0,1fr); grid-template-rows:auto auto; column-gap:14px; align-items:center; text-align:left; padding:8px 0; }
   .stop .pin{ grid-row:1 / 3; margin:0; width:56px; height:56px; }
   .stop .t{ grid-row:1 / 3; font-size:26px; min-width:76px; }
@@ -234,9 +238,9 @@ p{ margin:0; }
 .phase-t{ display:inline-flex; align-items:center; gap:8px; font-weight:700; font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); background:var(--teal-soft); padding:6px 12px; border-radius:999px; margin:6px 0 10px; }
 .phase-t.sun{ background:var(--sun-soft); color:var(--sun-d); }
 .tl{ list-style:none; margin:0 0 6px; padding:0; position:relative; }
-.tl::before{ content:""; position:absolute; left:82px; top:8px; bottom:8px; width:2px; background:var(--teal-line); }
-.tl li{ position:relative; display:grid; grid-template-columns:70px minmax(0,1fr); gap:28px; padding:9px 0; }
-.tl li::before{ content:""; position:absolute; left:76px; top:15px; width:14px; height:14px; border-radius:50%; background:#FFFFFF; border:3px solid var(--teal); }
+.tl::before{ content:""; position:absolute; left:94px; top:8px; bottom:8px; width:2px; background:var(--teal-line); }
+.tl li{ position:relative; display:grid; grid-template-columns:82px minmax(0,1fr); gap:28px; padding:9px 0; }
+.tl li::before{ content:""; position:absolute; left:88px; top:15px; width:14px; height:14px; border-radius:50%; background:#FFFFFF; border:3px solid var(--teal); }
 .tl li.key::before{ background:var(--sun); border-color:var(--sun); box-shadow:0 0 0 5px var(--sun-soft); }
 .tl li.pause::before{ border-color:#A9CCC6; }
 .tl b{ white-space:nowrap; font-weight:800; color:var(--teal-d); font-variant-numeric:tabular-nums; }
@@ -262,7 +266,7 @@ p{ margin:0; }
 .walk em{ display:inline-block; margin-top:6px; font-style:normal; font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--sun-d); }
 .note{ margin-top:14px; font-size:13px; color:var(--muted); }
 @media (max-width:900px){ .prog{ grid-template-columns:1fr; } .route{ position:static; } }
-@media (max-width:420px){ .tl::before{ left:66px; } .tl li{ grid-template-columns:56px minmax(0,1fr); gap:24px; } .tl li::before{ left:60px; } }
+@media (max-width:420px){ .tl::before{ left:78px; } .tl li{ grid-template-columns:68px minmax(0,1fr); gap:24px; } .tl li::before{ left:72px; } }
 
 /* Saveurs */
 .tastes{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:16px; }
@@ -365,7 +369,7 @@ p{ margin:0; }
 .rv{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
 .rv.in{ opacity:1; transform:none; }
 .rv.d1{ transition-delay:.08s; } .rv.d2{ transition-delay:.16s; }
-@media (prefers-reduced-motion: reduce){ *,*::before,*::after{ animation:none !important; transition:none !important; } .rv{ opacity:1; transform:none; } html{ scroll-behavior:auto; } }
+@media (prefers-reduced-motion: reduce){ .bus{ left:40% !important; opacity:1 !important; } *,*::before,*::after{ animation:none !important; transition:none !important; } .rv{ opacity:1; transform:none; } html{ scroll-behavior:auto; } }
 
 /* Module de réservation */
 .lgd-resa { --lgd-brand: #147566; --lgd-ink: #16302C; --lgd-muted: #4E6B65; --lgd-line: #D6E5E1; padding: 24px; border: 1px solid var(--lgd-line); border-radius: 22px; background: #FFFFFF; color: var(--lgd-ink); box-shadow: var(--shadow); scroll-margin-top: 84px; }
@@ -414,8 +418,8 @@ p{ margin:0; }
       </div>
       <div class="eb">
         <span class="eb-tag">Early bird</span>
-        <div class="price"><strong data-live="price">69 €</strong><s data-old="79">79 €</s></div>
-        <div class="lbl"><b>Pour les 20 premières places</b>puis 79 € · TTC par personne, aller-retour</div>
+        <div class="price"><strong data-live="price">69 €</strong><span class="then" data-old="79">puis 79 €</span></div>
+        <div class="lbl"><b>20 premières places</b>TTC par personne, aller-retour</div>
         <p class="lim">Tarif limité aux 20 premières réservations</p>
       </div>
       <p class="next" data-live="next" data-state="soon">Réservation ouverte : samedi 12 décembre</p>
@@ -446,12 +450,12 @@ p{ margin:0; }
   <div class="trip-card rv">
     <div class="trip-head"><h2 id="trip-t">Votre trajet en un coup d’œil</h2><span>Samedi 12 décembre 2026 · aller-retour</span></div>
     <div class="road">
-      <svg class="bus" viewBox="0 0 34 30" aria-hidden="true"><rect x="1" y="3" width="32" height="20" rx="5" fill="currentColor"/><rect x="5" y="7" width="8" height="6" rx="1.5" fill="#fff"/><rect x="15" y="7" width="8" height="6" rx="1.5" fill="#fff"/><rect x="25" y="7" width="5" height="6" rx="1.5" fill="#fff"/><circle cx="9" cy="24" r="4" fill="#033D47"/><circle cx="26" cy="24" r="4" fill="#033D47"/></svg>
+      <svg class="bus" viewBox="0 0 210 78" aria-hidden="true"> <defs> <linearGradient id="lgdbgl" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A3B42"/><stop offset=".55" stop-color="#0F1C21"/><stop offset="1" stop-color="#070E11"/></linearGradient> <linearGradient id="lgdbwh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset="1" stop-color="#E6ECEB"/></linearGradient> <linearGradient id="lgdbsh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#FFFFFF" stop-opacity="0"/><stop offset=".5" stop-color="#FFFFFF" stop-opacity=".28"/><stop offset="1" stop-color="#FFFFFF" stop-opacity="0"/></linearGradient> </defs> <ellipse cx="104" cy="72" rx="98" ry="4" fill="#033D47" opacity=".16"/> <path d="M10 64 Q4 64 4 57 L4 15 Q4 6 13 6 L178 6 Q192 6 198 17 L204 46 Q206 58 199 63 Q197 64 192 64 Z" fill="url(#lgdbwh)" stroke="#C9D8D4" stroke-width="1"/> <path d="M5 13 Q5 8 13 8 L178 8 Q190 8 195 18 L201 45 L186 45 Q170 44 150 40 Q120 34 80 33 L5 32 Z" fill="url(#lgdbgl)"/> <path d="M20 10 L60 10 L44 30 L8 30 Z" fill="url(#lgdbsh)"/> <path d="M110 10 L140 10 L126 32 L98 32 Z" fill="url(#lgdbsh)" opacity=".7"/> <path d="M184 12 Q192 14 196 24 L199 40 L190 40 Q186 26 180 14 Z" fill="#FFFFFF" opacity=".14"/> <g stroke="#3B4D54" stroke-width="1"><line x1="38" y1="10" x2="38" y2="32"/><line x1="70" y1="10" x2="70" y2="33"/><line x1="102" y1="10" x2="102" y2="34"/><line x1="134" y1="10" x2="134" y2="38"/><line x1="160" y1="10" x2="160" y2="42"/></g>  <image href="../img/urban-trip.png" x="74" y="37" width="58" height="24" preserveAspectRatio="xMidYMid meet"/> <rect x="5" y="34" width="56" height="3" rx="1.5" fill="#F8BA2F"/> <path d="M197 50 L204 49 L204.5 53 L197 54 Z" fill="#FFE9A6" stroke="#9FB1AD" stroke-width=".6"/> <path d="M190 61 L203 59" stroke="#B9C7C4" stroke-width="2" stroke-linecap="round"/> <path d="M193 11 Q205 9 207 18 L206 24" fill="none" stroke="#0F1C21" stroke-width="2.2" stroke-linecap="round"/> <rect x="203.5" y="21" width="4" height="8" rx="1.5" fill="#0F1C21"/> <path d="M4 50 L6 50 L6 56 L4 56 Z" fill="#C8402F"/> <path d="M34 64 A15 15 0 0 1 64 64 Z" fill="#1E2A2E"/> <path d="M146 64 A15 15 0 0 1 176 64 Z" fill="#1E2A2E"/> <g class="wh" style="transform-origin:49px 64px"><circle cx="49" cy="64" r="11" fill="#151B1D"/><circle cx="49" cy="64" r="6.5" fill="#D3DADB"/><g stroke="#8E9B9E" stroke-width="1.4"><line x1="49" y1="58.5" x2="49" y2="69.5"/><line x1="43.5" y1="64" x2="54.5" y2="64"/><line x1="45" y1="60" x2="53" y2="68"/><line x1="53" y1="60" x2="45" y2="68"/></g><circle cx="49" cy="64" r="2" fill="#6F7C7F"/></g> <g class="wh" style="transform-origin:161px 64px"><circle cx="161" cy="64" r="11" fill="#151B1D"/><circle cx="161" cy="64" r="6.5" fill="#D3DADB"/><g stroke="#8E9B9E" stroke-width="1.4"><line x1="161" y1="58.5" x2="161" y2="69.5"/><line x1="155.5" y1="64" x2="166.5" y2="64"/><line x1="157" y1="60" x2="165" y2="68"/><line x1="165" y1="60" x2="157" y2="68"/></g><circle cx="161" cy="64" r="2" fill="#6F7C7F"/></g> </svg>
       <div class="stop"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-6.1 7-12a7 7 0 0 0-14 0c0 5.9 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></span><span class="t" data-live="depart-time">04h00</span><span class="l">Départ</span><span class="w">Gare de Rungis<br>parking gratuit</span></div>
       <div class="stop hl"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18M5 21V9l7-5 7 5v12M10 21v-6h4v6"/></svg></span><span class="t">11h00</span><span class="l">Arrivée</span><span class="w">Strasbourg<br>Parc de l’Étoile</span></div>
       <div class="stop"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2l2.4 5 5.6.8-4 3.9.9 5.6L12 14.7l-4.9 2.6.9-5.6-4-3.9 5.6-.8z"/></svg></span><span class="t">9h30</span><span class="l">Temps libre</span><span class="w">au marché de Noël<br>de 11h00 à 20h30</span></div>
       <div class="stop hl"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="3"/><path d="M3 11h18M7 17v3M17 17v3"/></svg></span><span class="t">21h00</span><span class="l">Retour</span><span class="w">Départ de Strasbourg<br>rendez-vous à 20h30</span></div>
-      <div class="stop"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="t" data-live="retour-time">04h00</span><span class="l">Arrivée</span><span class="w">Gare de Rungis<br>vers 4h, le lendemain</span></div>
+      <div class="stop"><span class="pin"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></span><span class="t" data-live="retour-time">03h30</span><span class="l">Arrivée</span><span class="w">Gare de Rungis<br>vers 03h30, le lendemain</span></div>
     </div>
   </div>
 </div></section>
@@ -476,7 +480,7 @@ p{ margin:0; }
     <div class="rv">
       <div class="phase"><span class="phase-t">L’aller · nuit de vendredi à samedi</span>
         <ul class="tl" data-live="aller-depart"><li class="key"><b>04h00</b><span class="what">Départ de la gare de Rungis<small>1 rue des Vosges, 94150 Rungis · parking gratuit · rendez-vous à 03h30</small></span></li></ul>
-        <ul class="tl"><li class="pause"><b>06h00</b><span class="what">Pause de 30 minutes<small>Pour se dégourdir les jambes</small></span></li><li class="key"><b>11h00</b><span class="what">Arrivée à Strasbourg<small>Dépose au Parc de l’Étoile, à 15 min à pied du marché</small></span></li></ul>
+        <ul class="tl"><li class="pause"><b>06h00</b><span class="what">1re pause de 30 minutes<small>Après 2 h de route · aire de Reims Champagne</small></span></li><li class="pause"><b>08h30</b><span class="what">2e pause de 30 minutes<small>Après 2 h de route · aire de l’A4</small></span></li><li class="key"><b>11h00</b><span class="what">Arrivée à Strasbourg<small>Dépose au Parc de l’Étoile, à 15 min à pied du marché</small></span></li></ul>
       </div>
       <div class="phase"><span class="phase-t sun">Sur place · notre parcours conseillé</span>
         <ul class="tl">
@@ -490,7 +494,7 @@ p{ margin:0; }
         </ul>
       </div>
       <div class="phase"><span class="phase-t">Le retour</span>
-        <ul class="tl"><li class="key"><b>20h30</b><span class="what">Rendez-vous au car<small>Parc de l’Étoile · départ à 21h00 précises</small></span></li><li><b>21h00</b><span class="what">Départ de Strasbourg</span></li><li class="pause"><b>23h30</b><span class="what">Pause de 30 minutes</span></li><li class="key"><b data-live="retour-time">04h00</b><span class="what">Retour à la gare de Rungis<small>Heure estimée, dans la nuit de samedi à dimanche</small></span></li></ul>
+        <ul class="tl"><li class="key"><b>20h30</b><span class="what">Rendez-vous au car<small>Parc de l’Étoile · départ à 21h00 précises</small></span></li><li><b>21h00</b><span class="what">Départ de Strasbourg</span></li><li class="pause"><b>22h50</b><span class="what">1re pause de 30 minutes<small>Après 1 h 50 de route · aire de l’A4</small></span></li><li class="pause"><b>01h10</b><span class="what">2e pause de 30 minutes<small>Après 1 h 50 de route · aire de Reims Champagne</small></span></li><li class="key"><b data-live="retour-time">03h30</b><span class="what">Retour à la gare de Rungis<small>Heure estimée, dans la nuit de samedi à dimanche</small></span></li></ul>
       </div>
       <p class="note">Horaires indicatifs, susceptibles d’évoluer selon la circulation et les pauses obligatoires du conducteur.</p>
     </div>
@@ -541,7 +545,7 @@ p{ margin:0; }
         <div class="lgd-grid"><label>Nom et prénom<input name="name" autocomplete="name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone mobile<input name="phone" type="tel" autocomplete="tel" required></label><label>Code promo <span class="lgd-opt">(facultatif)</span><input name="promoCode" autocomplete="off"></label></div>
         <p class="lgd-info" data-id hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p>
         <label class="lgd-check"><input type="checkbox" name="acceptCgv" required> <span>J’accepte les <a href="../cgv-excursions/" target="_blank" rel="noopener">conditions générales de vente</a></span></label>
-        <label class="lgd-check"><input type="checkbox" name="optOut"> <span>Je ne souhaite pas recevoir les offres d’excursions de LGD Paris par e-mail et SMS</span></label>
+        <label class="lgd-check"><input type="checkbox" name="optOut"> <span>Je ne souhaite pas recevoir les offres d’excursions de LGD Paris par e-mail</span></label>
         <p class="lgd-total" data-total></p><p class="lgd-err" data-err hidden></p>
         <button type="submit" class="lgd-pay" data-pay>Payer</button>
         <p class="lgd-secure"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Paiement sécurisé par Stripe · carte, Apple Pay, Google Pay</p>
@@ -552,7 +556,7 @@ p{ margin:0; }
         <ul class="stops" data-live="pickups"><li><b>04h00</b><span>Gare de Rungis<small><a href="https://www.google.com/maps/search/?api=1&amp;query=1%20rue%20des%20Vosges%2094150%20Rungis" target="_blank" rel="noopener">1 rue des Vosges, 94150 Rungis</a></small></span></li></ul>
         <div class="park"><span class="ic">P</span><div><b>Parking gratuit</b>Stationnement facile, de nombreuses places à proximité : laissez votre voiture le temps de l’excursion.</div></div>
       </div>
-      <div class="card rv d1"><h3>Inclus dans le prix</h3><ul class="checks"><li>Transport aller-retour en autocar grand confort</li><li>Deux pauses sur le trajet aller</li><li>Accompagnement LGD Paris</li><li>9h30 de temps libre à Strasbourg</li><li>Rappel par e-mail et SMS la veille</li><li>Remboursement intégral si nous annulons le départ</li></ul></div>
+      <div class="card rv d1"><h3>Inclus dans le prix</h3><ul class="checks"><li>Transport aller-retour en autocar grand confort</li><li>Deux pauses sur le trajet aller</li><li>Accompagnement LGD Paris</li><li>9h30 de temps libre à Strasbourg</li><li>Rappel par e-mail la veille</li><li>Remboursement intégral si nous annulons le départ</li></ul></div>
     </div>
   </div>
 </div></section>
@@ -568,7 +572,7 @@ p{ margin:0; }
     <div class="tipc alert rv d2"><span class="ic"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v6M12 16.5v.01"/></svg></span><b>Ponctualité : 30 min avant</b><p>Rendez-vous à 03h30 à la gare de Rungis pour un départ à 04h00, et à 20h30 au car pour le retour de 21h00. Le car ne peut pas attendre.</p></div>
   </div>
   <div class="duo">
-    <div class="card rv"><h3>À prévoir</h3><ul class="checks" data-live="practical"><li>Parking gratuit à la gare de Rungis : stationnement facile, de nombreuses places à proximité</li><li>Des vêtements chauds : le marché de Noël se visite en extérieur</li><li>Un en-cas et une bouteille d’eau pour le trajet de nuit</li><li>Un sac pour vos achats</li></ul><p class="idnote" data-live="id" hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p></div>
+    <div class="card rv"><h3>À prévoir</h3><ul class="checks" data-live="practical"><li>Parking gratuit à la gare de Rungis : stationnement facile, de nombreuses places à proximité</li><li>Des vêtements chauds : le marché de Noël se visite en extérieur</li><li>Un en-cas pour le trajet de nuit</li><li>Un sac pour vos achats</li></ul><p class="idnote" data-live="id" hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p></div>
     <div class="card rv d1"><h3>Non inclus</h3><ul class="checks crosses"><li>Repas et boissons</li><li>Achats sur le marché</li><li>Visites payantes</li><li>Pourboires</li></ul><h3 style="margin-top:20px">Votre autocar</h3><p style="color:var(--muted)">Grand confort, 55 places, conduit par un chauffeur professionnel LGD Paris.</p><div class="coach"><span>Sièges inclinables</span><span>Chauffage</span><span>Climatisation</span><span>Prises USB</span><span>Soute à bagages</span><span>Chauffeur professionnel</span></div></div>
   </div>
 </div></section>
@@ -585,7 +589,7 @@ p{ margin:0; }
 <section class="sec"><div class="wrap">
   <div class="sec-head rv"><span class="eyebrow">Questions fréquentes</span><h2 class="h2">Tout ce qu’il faut <em>savoir</em></h2></div>
   <div class="faq">
-    <details><summary>Où se trouve le point de départ ?</summary><p>À la gare de Rungis, 1 rue des Vosges, 94150 Rungis. Le parking y est gratuit et le stationnement facile, avec de nombreuses places à proximité. L’adresse et l’horaire sont rappelés dans votre e-mail de confirmation et la veille du départ, par e-mail et par SMS.</p></details>
+    <details><summary>Où se trouve le point de départ ?</summary><p>À la gare de Rungis, 1 rue des Vosges, 94150 Rungis. Le parking y est gratuit et le stationnement facile, avec de nombreuses places à proximité. L’adresse et l’horaire sont rappelés dans votre e-mail de confirmation et la veille du départ, par e-mail.</p></details>
     <details><summary>À quelle heure dois-je me présenter ?</summary><p>30 minutes avant le départ, soit à 03h30, dans la nuit du vendredi 11 au samedi 12 décembre. Le car part à 04h00 précises.</p></details>
     <details><summary>Où le car nous dépose-t-il à Strasbourg ?</summary><p>Au Parc de l’Étoile, à 15 minutes à pied de la cathédrale. Le car vous y reprend le soir : rendez-vous à 20h30 pour un départ à 21h00.</p></details>
     <details><summary>Les repas sont-ils compris ?</summary><p>Non : les repas et les boissons restent à votre charge. Le départ étant très matinal, prévoyez un en-cas pour le trajet. Sur place, les chalets proposent de quoi se régaler toute la journée.</p></details>
