@@ -542,7 +542,8 @@ p{ margin:0; }
       <form data-form hidden novalidate>
         <div class="lgd-grid"><label>Date de départ<select name="departureId" required></select></label><label>Point de prise en charge<select name="pickupId" required></select></label><label>Nombre de voyageurs<input name="qty" type="number" min="1" max="10" value="1" inputmode="numeric" required></label></div>
         <p class="lgd-when" data-when></p>
-        <div class="lgd-grid"><label>Nom et prénom<input name="name" autocomplete="name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone mobile<input name="phone" type="tel" autocomplete="tel" required></label><label>Code promo <span class="lgd-opt">(facultatif)</span><input name="promoCode" autocomplete="off"></label></div>
+        <div class="lgd-grid"><label>Nom<input name="nom" autocomplete="family-name" required></label><label>Prénom<input name="prenom" autocomplete="given-name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone mobile<input name="phone" type="tel" autocomplete="tel" required></label><label>Code promo <span class="lgd-opt">(facultatif)</span><input name="promoCode" autocomplete="off"></label></div>
+        <div data-voyageurs style="display:flex;flex-direction:column;gap:14px"></div>
         <p class="lgd-info" data-id hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p>
         <label class="lgd-check"><input type="checkbox" name="acceptCgv" required> <span>J’accepte les <a href="../cgv-excursions/" target="_blank" rel="noopener">conditions générales de vente</a></span></label>
         <label class="lgd-check"><input type="checkbox" name="optOut"> <span>Je ne souhaite pas recevoir les offres d’excursions de LGD Paris par e-mail</span></label>
@@ -723,14 +724,30 @@ p{ margin:0; }
       pay.textContent = 'Payer ' + euro(count() * data.excursion.price);
     }
     function fill(){ var d = cur(); sPk.innerHTML = d.pickups.map(function(p){ return '<option value="' + esc(p.id) + '">' + esc(hh(p.time) + ' · ' + p.name) + '</option>'; }).join(''); qty.max = String(Math.min(10, d.remaining)); upd(); }
-    sDep.addEventListener('change', fill); sPk.addEventListener('change', upd); qty.addEventListener('input', upd); fill();
+    var vbox = w.querySelector('[data-voyageurs]'), vsave = {};
+    function vkeep(){ vbox.querySelectorAll('input').forEach(function(i){ vsave[i.name] = i.type === 'checkbox' ? i.checked : i.value; }); }
+    function vv(k, d){ return vsave[k] === undefined ? d : vsave[k]; }
+    function voy(){
+      vkeep(); var h = '';
+      for(var i = 1; i < count(); i++){
+        var same = vv('same' + i, true);
+        h += '<div style="display:flex;flex-direction:column;gap:12px"><p style="margin:0;font-weight:700">Voyageur ' + (i + 1) + '</p>'
+          + '<div class="lgd-grid"><label>Nom<input name="nom' + i + '" required value="' + esc(vv('nom' + i, '')) + '"></label><label>Prénom<input name="prenom' + i + '" required value="' + esc(vv('prenom' + i, '')) + '"></label></div>'
+          + '<label class="lgd-check"><input type="checkbox" name="same' + i + '" data-i="' + i + '"' + (same ? ' checked' : '') + '> <span>Utiliser mon téléphone et mon e-mail</span></label>'
+          + '<div class="lgd-grid" data-own="' + i + '"' + (same ? ' style="display:none"' : '') + '><label>E-mail<input name="email' + i + '" type="email"' + (same ? '' : ' required') + ' value="' + esc(vv('email' + i, '')) + '"></label><label>Téléphone mobile<input name="phone' + i + '" type="tel"' + (same ? '' : ' required') + ' value="' + esc(vv('phone' + i, '')) + '"></label></div></div>';
+      }
+      vbox.innerHTML = h;
+    }
+    vbox.addEventListener('change', function(e){ var i = e.target.getAttribute('data-i'); if(i === null) return; var own = vbox.querySelector('[data-own="' + i + '"]'); own.style.display = e.target.checked ? 'none' : ''; own.querySelectorAll('input').forEach(function(x){ x.required = !e.target.checked; }); });
+    function voyageurs(){ var f = form.elements, out = [{ nom: f.nom.value.trim(), prenom: f.prenom.value.trim(), email: f.email.value.trim(), telephone: f.phone.value.trim() }]; for(var i = 1; i < count(); i++){ var s = f['same' + i].checked; out.push({ nom: f['nom' + i].value.trim(), prenom: f['prenom' + i].value.trim(), email: s ? f.email.value.trim() : f['email' + i].value.trim(), telephone: s ? f.phone.value.trim() : f['phone' + i].value.trim(), coordonneesReservant: s }); } return out; }
+    sDep.addEventListener('change', function(){ fill(); voy(); }); sPk.addEventListener('change', upd); qty.addEventListener('input', function(){ upd(); voy(); }); fill(); voy();
     form.addEventListener('submit', function(e){
       e.preventDefault(); err.hidden = true;
       if(!form.reportValidity()) return;
       pay.disabled = true; pay.textContent = 'Redirection vers le paiement…';
       track('InitiateCheckout', 'InitiateCheckout', { content_ids:[slug], content_type:'product', value: count() * data.excursion.price, currency:'EUR', num_items: count() });
       var f = form.elements;
-      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: f.name.value, email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), pageUrl: location.origin + location.pathname };
+      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: (f.prenom.value.trim() + ' ' + f.nom.value.trim()), voyageurs: voyageurs(), email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), pageUrl: location.origin + location.pathname };
       fetch(API + '/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body) })
         .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || 'Le paiement n’a pas pu démarrer. Réessayez.'); location.href = j.url; }); })
         .catch(function(e2){ err.textContent = e2.message || 'Le paiement n’a pas pu démarrer. Réessayez.'; err.hidden = false; pay.disabled = false; upd(); });
