@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="referrer" content="no-referrer">
+<title>Feuille de route chauffeur – LGD Paris</title>
+<style>
+:root{--or:#E9A931;--nuit:#14161c;--fond:#f3efe6;--txt:#1d1d1f;--doux:#6b6b70;--ok:#1f8a4c;--okbg:#e3f4ea;--bord:#e2ddd2;--cur:#fff4d6}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:var(--fond);color:var(--txt);font-size:16px;line-height:1.45}
+header{background:var(--nuit);color:#fff;padding:16px}
+.ex{display:inline-block;background:#c0392b;color:#fff;font-size:12px;font-weight:600;padding:2px 8px;border-radius:6px;margin-bottom:8px}
+.marque{color:var(--or);font-size:12px;letter-spacing:.12em;font-weight:600}
+header h1{margin:4px 0 6px;font-size:23px}
+.meta{font-size:14px;color:#cfcfd4}
+.prog{position:sticky;top:0;z-index:5;background:var(--nuit);color:#fff;padding:8px 14px;font-size:14px;display:flex;align-items:center;gap:10px}
+.bar{flex:1;height:6px;background:#2f323b;border-radius:3px;overflow:hidden}.bar i{display:block;height:6px;background:var(--or);width:0}
+main{padding:12px;max-width:640px;margin:0 auto}
+section{background:#fff;border:1px solid var(--bord);border-radius:14px;padding:14px;margin-bottom:12px}
+h2{font-size:17px;margin:0 0 10px}
+.lieu{border:1px solid var(--bord);border-radius:10px;padding:10px;margin:8px 0;background:#fcfbf8}
+.lieu .q{font-size:12px;color:var(--doux);font-weight:600;letter-spacing:.04em}
+.lieu .a{font-size:15px;margin:2px 0 6px}
+.lieu a{font-size:13px;text-decoration:none;background:var(--nuit);color:#fff;padding:6px 10px;border-radius:8px;display:inline-block}
+.step{border-top:1px solid var(--bord);padding:10px 4px;transition:opacity .2s}
+.step.locked{opacity:.4;pointer-events:none}
+.step.current{background:var(--cur);border-radius:10px;padding:10px 8px}
+.step.done .lbl::before{content:"✓ ";color:var(--ok);font-weight:700}
+.lbl{font-weight:500}
+.chk{display:flex;align-items:center;gap:12px;cursor:pointer}
+.chk input{width:24px;height:24px;accent-color:var(--ok);flex:none}
+.choix{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.choix button{flex:1;min-width:60px;font-size:15px;padding:10px 6px;border:1px solid var(--bord);border-radius:8px;background:#fff}
+.choix button.sel{background:var(--nuit);color:#fff}
+input[type=number],textarea{width:100%;font-size:16px;padding:10px;border:1px solid var(--bord);border-radius:8px;margin-top:6px}
+.annonce{background:#fbf6ea;border-left:4px solid var(--or);padding:10px 12px;font-size:15px;margin:8px 0}
+.annonce .t{font-size:12px;font-weight:600;color:#9a6a10;margin-bottom:4px}
+.slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px;margin-top:8px}
+.slot{position:relative;border:2px dashed #c9c3b5;border-radius:10px;height:96px;display:flex;align-items:center;justify-content:center;text-align:center;font-size:12px;color:var(--doux);overflow:hidden;cursor:pointer;padding:4px}
+.slot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.slot.ok{border:2px solid var(--ok)}
+.slot input{display:none}
+.btn{display:block;width:100%;font-size:16px;font-weight:600;padding:12px;border-radius:10px;border:0;background:#1f8a4c;color:#fff;margin-top:8px}
+.btn.sec{background:#fff;color:var(--txt);border:1px solid var(--bord);font-weight:500}
+.msg{font-size:13px;color:var(--doux);margin-top:6px}
+.warn{font-size:13px;color:#a0521a;margin-top:6px}
+.pax{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:9px 8px;border-top:1px solid var(--bord);border-radius:8px}
+.pax.on{background:var(--okbg)}.pax.off{background:#fbe7e4}.pa{font-size:13px;padding:7px 8px;border:1px solid var(--bord);border-radius:8px;background:#fff}.pp.sel{background:var(--ok);color:#fff;border-color:var(--ok)}.aa.sel{background:#c0392b;color:#fff;border-color:#c0392b}
+.pax .nom{flex:1;display:flex;gap:10px;align-items:center;cursor:pointer}
+.rond{width:24px;height:24px;border-radius:50%;border:2px solid #b9b4a8;flex:none;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px}
+.pax.on .rond{background:var(--ok);border-color:var(--ok)}
+.sous{font-size:12px;color:var(--doux)}
+.tel{text-decoration:none;background:var(--nuit);color:#fff;font-size:13px;padding:7px 10px;border-radius:8px}
+.cpt{font-weight:700}
+pre{white-space:pre-wrap;font-size:13px;background:var(--fond);padding:10px;border-radius:8px}
+.grp{font-size:12px;font-weight:700;color:var(--doux);letter-spacing:.04em;margin:10px 0 2px;text-transform:uppercase}
+.etat{font-size:15px;color:var(--doux);text-align:center;padding:30px 10px}
+</style>
+</head>
+<body>
+<header>
+  <div class="marque">URBAN TRIP BY LGD PARIS</div>
+  <h1 id="titre">Feuille de route</h1>
+  <div class="meta" id="meta">Chargement…</div>
+</header>
+<div class="prog" id="prog" hidden><span id="ptxt">0 %</span><div class="bar"><i id="pbar"></i></div></div>
+<main id="m"></main>
+<script>
+var API="https://europe-west1-lgd-pilotage-excursions.cloudfunctions.net";
+var LGD="01 42 37 95 40";
+var Q=new URLSearchParams(location.search),DID=Q.get("d")||"",TOK=Q.get("t")||"";
+var LIEUX={},A={},PAX={},PLAN=[],ETAT=["Tour extérieur du car","Intérieur du car"],INFO={},KEY="",S={};
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var FILES={};var STEPS=[];
+function el(h){var d=document.createElement("div");d.innerHTML=h;return d.firstElementChild}
+function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function mapLink(q){return q?'<a href="https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(q)+'" target="_blank" rel="noopener">Itinéraire</a>':""}
+var M=document.getElementById("m");
+function hh(t){return t?String(t).replace(":","h"):"?"}
+function minus(t,m){if(!t)return "";var p=String(t).split(":"),x=(+p[0]*60+(+p[1])-m+1440)%1440;return ("0"+Math.floor(x/60)).slice(-2)+":"+("0"+x%60).slice(-2)}
+function fois(list){if(!list.length)return "";var t=list.map(function(p){return "à "+hh(p.heure)});return "Pendant le trajet, nous nous arrêterons "+list.length+" fois, "+(t.length>1?t.slice(0,-1).join(", ")+" et "+t[t.length-1]:t[0])+". "}
+function dateFr(d){try{return new Date(d+"T12:00:00").toLocaleDateString("fr-FR",{weekday:"long",day:"numeric",month:"long",year:"numeric"})}catch(e){return d}}
+function etat(t){M.innerHTML='<section><div class="etat">'+t+'</div></section>'}
+
+function init(D){
+ var ex=D.excursion||{},dp=D.depart||{},rt=ex.route||{},ch=dp.chauffeur||{},pk=dp.pickups||[],pk0=pk[0]||{name:"Point de départ",address:"",time:""};
+ var nomCh=dp.driversNames||"[nom]",prenom=(dp.driversNames||"").trim().split(/[ ,]/)[0]||"[prénom]",ville=rt.ville||ex.name||"";
+ INFO={nom:ex.name||"Excursion",date:(dp.date||"").split("-").reverse().join("/"),chauffeur:nomCh};
+ document.getElementById("titre").textContent=ex.name||"Feuille de route";
+ document.getElementById("meta").innerHTML=esc(dateFr(dp.date))+" · Chauffeur : "+esc(nomCh)+" · Car : "+esc(dp.vehicle||"[à compléter]")+"<br>LGD : "+LGD+" · Photos et rapport : dans le groupe WhatsApp de la mission";
+ KEY="lgd-fdr-"+DID;try{S=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){S={}}
+ if(D.terminee){etat("✓ Mission terminée : le rapport a été envoyé. Merci !<br><br>La liste des passagers n'est plus disponible.");return}
+ document.getElementById("prog").hidden=false;
+ var pa=rt.pausesAller||[],pr=rt.pausesRetour||[],dep=rt.depose||{},park=rt.parking||{};
+ pk.forEach(function(p,i){LIEUX["pk"+i]=[(i?"Prise en charge · "+hh(p.time)+" · ":"Mise en place / départ · ")+p.name,p.address||p.name,p.address||p.name]});
+ pa.forEach(function(p,i){LIEUX["pa"+i]=["Pause "+(i+1)+" aller · "+hh(p.heure)+(p.duree?" · "+p.duree+" min":""),p.lieu+(p.adresse?" – "+p.adresse:""),p.adresse||p.lieu]});
+ pr.forEach(function(p,i){LIEUX["pr"+i]=["Pause "+(i+1)+" retour · "+hh(p.heure)+(p.duree?" · "+p.duree+" min":""),p.lieu+(p.adresse?" – "+p.adresse:""),p.adresse||p.lieu]});
+ LIEUX.depose=["Dépose et reprise des clients · "+hh(dep.heure)+" / "+hh(rt.rdvRetour),(dep.lieu||"[à compléter]")+(dep.adresse?" – "+dep.adresse:""),dep.adresse||dep.lieu||""];
+ LIEUX.parking=["Parking autocar"+(park.prix?" · "+park.prix+(/€/.test(park.prix)?"":" €"):""),(park.lieu||"[à compléter]")+(park.adresse?" – "+park.adresse:""),park.adresse||park.lieu||""];
+ LIEUX.hotel=["Hôtel chauffeur"+(ch.hotelHoraires?" · "+ch.hotelHoraires:""),ch.hotel||"[adresse de l'hôtel à compléter]",ch.hotel||""];
+ var appel=ch.telephone||LGD;
+ A.dep="« Bonjour à tous, bienvenue à bord de la compagnie LGD Paris. Je suis "+prenom+", votre chauffeur aujourd'hui. Nous allons à "+ville+". Nous arriverons vers "+hh(dep.heure)+". "+fois(pa)+"Merci de ne pas manger dans le car. Les sièges sont inclinables et décalables sur le côté. Pour votre sécurité, merci de ne pas vous mettre debout pendant le trajet. Merci d'attacher vos ceintures. Je vous souhaite un agréable voyage. »";
+ A.arr="« J'espère que vous avez passé un agréable voyage. Je vous donne rendez-vous ce soir à "+hh(rt.rdvRetour)+", "+(dep.lieu?"au point de dépose : "+dep.lieu:"au point de dépose")+". Le car partira à "+hh(rt.departRetour)+" précises. Vous pouvez laisser vos affaires à bord du car. Gardez avec vous vos papiers et vos objets de valeur. En cas de besoin, appelez le "+appel+". Je vous souhaite une agréable journée. »";
+ A.ret="« Bonsoir à tous, nous espérons que vous avez passé une excellente journée. Nous arriverons à "+pk0.name+" vers "+hh(ex.returnTime)+". "+fois(pr)+"Pour rappel, merci de ne pas manger dans le car. Les sièges sont inclinables et décalables sur le côté. Pour votre sécurité, merci de ne pas vous mettre debout pendant le trajet. Merci d'attacher vos ceintures. Je vous souhaite un bon voyage. »";
+ A.fin="« J'espère que vous avez passé un agréable voyage. Merci d'avoir participé à notre excursion et d'avoir fait confiance à la compagnie LGD Paris. N'hésitez pas à nous laisser un superbe avis sur Google : la carte avec le QR code est à votre disposition à la sortie. La compagnie espère vous revoir bientôt pour nos prochaines excursions. Pensez à vérifier que vous n'oubliez rien. Bonne nuit ! »";
+ Object.keys(A).forEach(function(k){A[k]=esc(A[k])});
+ var V=D.voyageurs||[];
+ function paxOf(ids){return V.filter(function(v){return ids.indexOf(v.pickupId)>=0||(!v.pickupId&&ids.indexOf(pk0.id)>=0)}).map(function(v){var nom=(String(v.nom).toUpperCase()+" "+v.prenom).trim()+(v.places>1?" (×"+v.places+")":"");var r=v.reservePar&&v.reservePar.toLowerCase()!=(v.prenom+" "+v.nom).trim().toLowerCase()&&v.reservePar.toLowerCase()!=(v.nom+" "+v.prenom).trim().toLowerCase()?" · réservé par "+v.reservePar:"";return {nom:nom,sous:(v.telephone||"pas de téléphone")+r,tel:v.telephone||"",grp:(pk.filter(function(p){return p.id==v.pickupId})[0]||pk0).name}})}
+ PAX.d0=paxOf([pk0.id]);pk.slice(1).forEach(function(p,i){PAX["d"+(i+1)]=paxOf([p.id])});PAX.r=paxOf(pk.map(function(p){return p.id}).concat([""]));var ord=pk.map(function(p){return p.name});PAX.r.sort(function(a,b){return ord.indexOf(a.grp)-ord.indexOf(b.grp)});
+ var prise=minus(pk0.time,30);
+ var s3=[["T","dep"],["c","ann1","Annonce faite"],["c","depart","Départ effectué"]];
+ pk.slice(1).forEach(function(p,i){s3.push(["L","pk"+(i+1)]);s3.push(["px","d"+(i+1),"Passagers – "+p.name,PAX["d"+(i+1)]])});
+ pa.forEach(function(p,i){s3.push(["L","pa"+i]);s3.push(["c","pa"+i,"Pause "+(i+1)+" : tout le monde est remonté"])});
+ var s5=[["L","depose"],["c","lum2","Lumière et chauffage allumés"],["px","r","Passagers – retour",PAX.r],["T","ret"],["c","ann3","Annonce faite"]];
+ pr.forEach(function(p,i){s5.push(["L","pr"+i]);s5.push(["c","pr"+i,"Pause "+(i+1)+" retour : tout le monde est remonté"])});
+ var s1=[["L","pk0"],["n","kmDep","Km au départ"],["ch","carbDep","Carburant au départ",["1/4","1/2","3/4","Plein"]],["ph","photoCarbDep","Photo de la jauge de carburant",["Jauge carburant"]],["ch","adbDep","AdBlue au départ",["Bas","Moyen","Plein"]],["ph","photoAdbDep","Photo de la jauge d'AdBlue",["Jauge AdBlue"]],["ph","videoEtatDep","Vidéos état des lieux du car au départ",ETAT,"video"],["c","micro","Micro testé"],["c","bord","À bord : carte carburant, carte bancaire pour les parkings"]];
+ var s2=[["c","dem","Car démarré"],["c","lum","Lumière allumée"],["c","chauf","Chauffage allumé"],["c","resa","Réservation contrôlée (avec la liste)"]];
+ if(ex.idRequired)s2.push(["c","id","Pièce d'identité contrôlée"]);
+ s2.push(["px","d0","Passagers – départ"+(pk.length>1?" · "+pk0.name:""),PAX.d0]);
+ var s4=[["L","depose"],["T","arr"],["c","ann2","Annonce faite"],["L","parking"],["ph","photoTicket","Photo du ticket de parking",["Ticket"]],["L","hotel"]];
+ var s6=[["T","fin"],["c","ann4","Annonce faite"],["c","oubli","Tour du car : objets oubliés, déchets"],["opt","photoOubli","Objet oublié trouvé ? Photo (facultatif)"],["n","kmArr","Km à l'arrivée"],["ch","carbArr","Carburant à l'arrivée",["1/4","1/2","3/4","Plein"]],["ph","photoCarbArr","Photo de la jauge de carburant à l'arrivée",["Jauge carburant"]],["ch","adbArr","AdBlue à l'arrivée",["Bas","Moyen","Plein"]],["ph","photoAdbArr","Photo de la jauge d'AdBlue à l'arrivée",["Jauge AdBlue"]],["ph","videoEtatArr","Vidéos état des lieux du car à l'arrivée",ETAT,"video"],["n","frais","Frais payés en € (parking, hôtel, péage) – 0 si aucun"],["tx","rem","Incidents et remarques (facultatif)"],["rep","rapport","Envoyer le rapport dans le groupe"]];
+ PLAN=[["1 · Prise de service – "+hh(prise),s1],["2 · Mise en place et accueil – "+hh(prise),s2],["3 · Départ – "+hh(pk0.time),s3],["4 · Arrivée – "+hh(dep.heure),s4],["5 · Retour – mise en place "+hh(minus(rt.departRetour,15))+", départ "+hh(rt.departRetour),s5],["6 · Arrivée à "+pk0.name+" (≈ "+hh(ex.returnTime)+") et fin de service",s6]];
+ PLAN.forEach(function(sec){sec[0]=esc(sec[0]);sec[1].forEach(function(it){if(it[0]=="px")it[2]=esc(it[2])})});
+PLAN.forEach(function(sec){var s=el('<section><h2>'+sec[0]+'</h2></section>');M.appendChild(s);
+ sec[1].forEach(function(it){var t=it[0],k=it[1];
+  if(t=="L"){var l=LIEUX[k];s.appendChild(el('<div class="lieu"><div class="q">'+esc(l[0])+'</div><div class="a">'+esc(l[1])+'</div>'+mapLink(l[2])+'</div>'));return}
+  if(t=="T"){s.appendChild(el('<div class="annonce"><div class="t">ANNONCE AU MICRO</div>'+A[k]+'</div>'));return}
+  var st=el('<div class="step" data-k="'+k+'"></div>');s.appendChild(st);var o={el:st,k:k,t:t};STEPS.push(o);
+  if(t=="c"){st.innerHTML='<label class="chk"><input type="checkbox"><span class="lbl">'+it[2]+'</span></label>';var cb=st.querySelector("input");cb.checked=!!S[k];cb.onchange=function(){S[k]=cb.checked;save();refresh()};o.done=function(){return !!S[k]}}
+  if(t=="n"){st.innerHTML='<span class="lbl">'+it[2]+'</span><input type="number" inputmode="decimal">';var ip=st.querySelector("input");ip.value=S[k]||"";ip.oninput=function(){S[k]=ip.value;save();refresh()};o.done=function(){return S[k]!==undefined&&S[k]!==""}}
+  if(t=="tx"){st.innerHTML='<span class="lbl">'+it[2]+'</span><textarea rows="3"></textarea>';var ta=st.querySelector("textarea");ta.value=S[k]||"";ta.oninput=function(){S[k]=ta.value;save()};o.done=function(){return true};o.optional=true}
+  if(t=="ch"){st.innerHTML='<span class="lbl">'+it[2]+'</span><div class="choix">'+it[3].map(function(v){return '<button type="button">'+v+'</button>'}).join("")+'</div>';st.querySelectorAll("button").forEach(function(b){if(S[k]==b.textContent)b.classList.add("sel");b.onclick=function(){S[k]=b.textContent;save();st.querySelectorAll("button").forEach(function(x){x.classList.toggle("sel",x===b)});refresh()}});o.done=function(){return !!S[k]}}
+  if(t=="ph"){buildPhoto(st,o,it)}
+  if(t=="opt"){buildOpt(st,o,it)}
+  if(t=="px"){buildPax(st,o,k,it[2],it[3])}
+  if(t=="rep"){buildRep(st,o,it[2])}
+ })});
+ refresh();
+ if(S.rapport&&!S.envoye)fin();
+}
+function buildPhoto(st,o,it){var k=it[1],labels=it[3],vid=it[4]=='video';FILES[k]=FILES[k]||[];
+ st.innerHTML='<span class="lbl">'+(vid?'🎥 ':'📸 ')+it[2]+'</span><div class="slots">'+labels.map(function(l,i){return '<label class="slot" data-i="'+i+'"><span>'+l+'<br>'+(vid?'Filmer':'Prendre la photo')+'</span><input type="file" accept="'+(vid?'video/*':'image/*')+'" capture="environment"></label>'}).join("")+'</div><button class="btn" type="button">Envoyer dans le groupe WhatsApp</button><div class="msg"></div><div class="manu" hidden><label class="chk" style="margin-top:6px"><input type="checkbox"><span>J\'ai envoyé dans le groupe moi-même</span></label></div>';
+ var msg=st.querySelector(".msg"),btn=st.querySelector(".btn"),manu=st.querySelector(".manu"),mcb=manu.querySelector("input");
+ st.querySelectorAll(".slot").forEach(function(sl){var i=+sl.dataset.i;var inp=sl.querySelector("input");inp.onchange=function(){var f=inp.files[0];if(!f)return;FILES[k][i]=f;if(vid){sl.querySelector('span').innerHTML='✓ '+labels[i]+'<br>vidéo prise ('+Math.round(f.size/1048576)+' Mo)'}else{var img=sl.querySelector("img")||sl.appendChild(document.createElement("img"));img.src=URL.createObjectURL(f)}sl.classList.add("ok");S[k+"_n"]=FILES[k].filter(Boolean).length;save();upd()}});
+ function taken(){return (S[k+"_n"]||0)>=labels.length}
+ function upd(){var n=FILES[k].filter(Boolean).length;btn.disabled=!(n>=labels.length);btn.style.opacity=btn.disabled?.5:1;
+  if(S[k]=="ok")msg.textContent="✓ Envoyé dans le groupe.";else if(S[k]=="manuel")msg.textContent="✓ Envoi déclaré manuellement.";else msg.textContent=n<labels.length?(vid?"Filmez ":"Prenez ")+(labels.length-n)+(vid?" vidéo(s)":" photo(s)")+" pour débloquer l'envoi.":"Appuyez sur Envoyer, puis choisissez le groupe de la mission.";refresh()}
+ btn.onclick=function(){var fl=FILES[k].filter(Boolean);var data={files:fl,text:"Photos – "+it[2]};
+  if(navigator.canShare&&navigator.canShare({files:fl})){navigator.share(data).then(function(){S[k]="ok";save();upd()}).catch(function(e){msg.textContent="Envoi annulé. Réessayez."})}
+  else{manu.hidden=false;msg.innerHTML='<span class="warn">Ce téléphone ou ce navigateur ne permet pas l\'envoi direct. Envoyez les photos dans le groupe WhatsApp, puis cochez la case.</span>'}};
+ mcb.checked=S[k]=="manuel";mcb.onchange=function(){if(!taken()){mcb.checked=false;return}S[k]=mcb.checked?"manuel":"";save();upd()};
+ o.done=function(){return S[k]=="ok"||S[k]=="manuel"};setTimeout(upd,0)}
+function buildOpt(st,o,it){var k=it[1];st.innerHTML='<span class="lbl">📸 '+it[2]+'</span><label class="slot" style="max-width:120px;margin-top:8px"><span>Prendre la photo</span><input type="file" accept="image/*" capture="environment"></label><button class="btn sec" type="button" hidden>Envoyer dans le groupe WhatsApp</button><div class="msg"></div>';
+ var sl=st.querySelector('.slot'),inp=sl.querySelector('input'),btn=st.querySelector('.btn'),msg=st.querySelector('.msg'),f=null;
+ inp.onchange=function(){f=inp.files[0];if(!f)return;var img=sl.querySelector('img')||sl.appendChild(document.createElement('img'));img.src=URL.createObjectURL(f);sl.classList.add('ok');btn.hidden=false};
+ btn.onclick=function(){if(navigator.canShare&&navigator.canShare({files:[f]})){navigator.share({files:[f],text:'Objet oublié trouvé'}).then(function(){S[k]='ok';save();msg.textContent='✓ Envoyé.'}).catch(function(){})}else{msg.innerHTML='<span class="warn">Envoyez la photo dans le groupe WhatsApp vous-même.</span>'}};
+ o.optional=true;o.done=function(){return true}}
+function buildPax(st,o,p,titre,LIST){st.innerHTML='<span class="lbl">'+titre+'</span> · <span class="cpt"></span><div class="msg">Pointez chaque passager : Présent ou Absent. Absent : appelez le client (📞).</div><div class="liste"></div><label class="chk abs" style="margin-top:8px" hidden><input type="checkbox"><span>J\'ai appelé les clients absents</span></label><button class="btn" type="button">Valider l\'embarquement</button>';
+ var box=st.querySelector(".liste"),cpt=st.querySelector(".cpt"),abs=st.querySelector(".abs"),acb=abs.querySelector("input"),btn=st.querySelector(".btn");
+ function draw(){box.innerHTML="";var g=null;if(!LIST.length)box.appendChild(el('<div class="msg">Aucun passager inscrit.</div>'));LIST.forEach(function(x,i){var kk=p+"_"+i,v=S[kk]||"";if(p=="r"&&x.grp!==g){g=x.grp;box.appendChild(el('<div class="grp">'+esc(g)+'</div>'))}var d=el('<div class="pax'+(v=="P"?" on":v=="A"?" off":"")+'"><div class="nom"><span>'+esc(x.nom)+'<br><span class="sous">'+esc(x.sous)+'</span></span></div><button type="button" class="pa pp'+(v=="P"?" sel":"")+'">Présent</button><button type="button" class="pa aa'+(v=="A"?" sel":"")+'">Absent</button>'+(x.tel?'<a class="tel" href="tel:'+esc(x.tel.replace(/[^0-9+]/g,""))+'">📞</a>':'')+'</div>');
+   d.querySelector(".pp").onclick=function(){if(S[p+"_ok"])return;S[kk]=v=="P"?"":"P";save();draw()};d.querySelector(".aa").onclick=function(){if(S[p+"_ok"])return;S[kk]=v=="A"?"":"A";save();draw()};box.appendChild(d)});
+  var n=LIST.filter(function(_,i){return S[p+"_"+i]=="P"}).length,na=LIST.filter(function(_,i){return S[p+"_"+i]=="A"}).length,nr=LIST.length-n-na;cpt.textContent=n+" présents sur "+LIST.length+" · "+na+" absents · "+nr+" à pointer";abs.hidden=na==0;
+  btn.textContent=S[p+"_ok"]?"✓ Embarquement validé ("+n+"/"+LIST.length+")":"Valider l'embarquement ("+n+"/"+LIST.length+")";refresh()}
+ acb.checked=!!S[p+"_abs"];acb.onchange=function(){S[p+"_abs"]=acb.checked;save()};
+ btn.onclick=function(){if(S[p+"_ok"])return;var nr=LIST.filter(function(_,i){return !S[p+"_"+i]}).length,na=LIST.filter(function(_,i){return S[p+"_"+i]=="A"}).length;if(nr>0){cpt.style.color="#c0392b";return}if(na>0&&!S[p+"_abs"]){abs.hidden=false;abs.style.outline="2px solid #e0a020";return}S[p+"_ok"]=true;save();draw()};
+ o.done=function(){return !!S[p+"_ok"]};setTimeout(draw,0)}
+function absents(p){var L=PAX[p]||[];return L.filter(function(_,i){return S[p+"_"+i]!='P'}).map(function(x){return x.nom})}
+function tot(keys){var t=0,a=[];keys.forEach(function(k){var L=PAX[k]||[];t+=L.length;a=a.concat(absents(k))});return {t:t,a:a}}
+function photoTxt(k){return S[k]=="ok"?"envoyées":S[k]=="manuel"?"envoyées (déclaré)":"NON"}
+function rapport(){var dk=Object.keys(PAX).filter(function(k){return k!="r"}),a=tot(dk),b=tot(["r"]);return "📋 Rapport – "+INFO.nom+" "+INFO.date+"\nChauffeur : "+INFO.chauffeur+"\n\nDépart : "+(S.kmDep||"?")+" km · carburant "+(S.carbDep||"?")+" · AdBlue "+(S.adbDep||"?")+"\nArrivée : "+(S.kmArr||"?")+" km · carburant "+(S.carbArr||"?")+" · AdBlue "+(S.adbArr||"?")+"\nKm parcourus : "+((S.kmArr&&S.kmDep)?(S.kmArr-S.kmDep):"?")+"\n\nPassagers départ : "+(a.t-a.a.length)+"/"+a.t+(a.a.length?" – absents : "+a.a.join(", "):"")+"\nPassagers retour : "+(b.t-b.a.length)+"/"+b.t+(b.a.length?" – absents : "+b.a.join(", "):"")+"\n\nPhotos/vidéos : carburant départ "+photoTxt("photoCarbDep")+" · AdBlue départ "+photoTxt("photoAdbDep")+" · vidéos départ "+photoTxt("videoEtatDep")+" · ticket parking "+photoTxt("photoTicket")+" · carburant arrivée "+photoTxt("photoCarbArr")+" · AdBlue arrivée "+photoTxt("photoAdbArr")+" · vidéos arrivée "+photoTxt("videoEtatArr")+(S.photoOubli?" · objet oublié signalé":"")+"\n\nFrais payés : "+(S.frais||"0")+" €\nRemarques : "+(S.rem||"aucune")}
+function fin(){fetch(API+"/mission?d="+encodeURIComponent(DID)+"&t="+encodeURIComponent(TOK),{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({rapport:true})}).then(function(r){if(!r.ok)throw 0;S.envoye=1;save();Object.keys(PAX).forEach(function(k){PAX[k]=[]});document.getElementById("prog").hidden=true;etat("✓ Rapport envoyé, mission terminée. Merci !<br><br>La liste des passagers n'est plus disponible.")}).catch(function(){var w=document.getElementById("finw");if(!w){w=el('<div class="warn" id="finw">Rapport partagé, mais la fin de mission n\'a pas pu être enregistrée (pas de réseau ?). Rouvrez ce lien plus tard.</div>');M.appendChild(w)}})}
+function buildRep(st,o,titre){st.innerHTML='<button class="btn" type="button">'+titre+'</button><a class="btn sec" style="text-align:center;text-decoration:none" target="_blank" rel="noopener">Ou ouvrir WhatsApp avec le rapport</a><pre></pre>';
+ var b=st.querySelector("button"),a=st.querySelector("a"),pre=st.querySelector("pre");
+ o.upd=function(){var t=rapport();pre.textContent=t;a.href="https://wa.me/?text="+encodeURIComponent(t)};
+ b.onclick=function(){var t=rapport();if(navigator.share){navigator.share({text:t}).then(function(){S.rapport=1;save();refresh();fin()}).catch(function(){})}else{window.location.href=a.href;S.rapport=1;save();refresh();setTimeout(fin,800)}};
+ a.onclick=function(){S.rapport=1;save();setTimeout(function(){refresh();fin()},50)};
+ o.done=function(){return !!S.rapport}}
+function refresh(){var ok=true,cur=null,nd=0;STEPS.forEach(function(o){var d=o.done();if(d)nd++;o.el.classList.toggle("locked",!ok);o.el.classList.toggle("done",ok&&d);o.el.classList.toggle("current",ok&&!d&&!cur);if(ok&&!d&&!cur)cur=o;if(!d&&!o.optional)ok=false;if(o.upd)o.upd()});
+ var pc=Math.round(nd/STEPS.length*100);document.getElementById("ptxt").textContent=pc+" %";document.getElementById("pbar").style.width=pc+"%"}
+if(!DID||!TOK){etat("Lien incomplet. Demandez le lien de la feuille de route à LGD Paris ("+LGD+").");document.getElementById("meta").textContent=""}
+else fetch(API+"/mission?d="+encodeURIComponent(DID)+"&t="+encodeURIComponent(TOK),{cache:"no-store"}).then(function(r){return r.json().then(function(j){if(!r.ok)throw new Error(j.error||"");return j})}).then(init).catch(function(e){document.getElementById("meta").textContent="";etat(esc(e.message||"Impossible de charger la feuille de route.")+"<br><br>Vérifiez le réseau, ou appelez LGD Paris : "+LGD+".")});
+</script>
+</body>
+</html>
