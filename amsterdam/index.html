@@ -148,6 +148,16 @@ a{ color:#147566; }
   .lgd-resa .lgd-garantie strong { font-weight: 800; }
   .lgd-resa .lgd-garantie small { font-size: .9rem; line-height: 1.45; color: #4A3A12; }
   .lgd-resa .lgd-garantie small a { color: inherit; font-weight: 700; }
+.lgd-resa .lgd-gtab { margin-top: -6px; border: 1px solid var(--lgd-line, #E3DCCF); border-radius: 14px; background: #FFFFFF; padding: 12px 12px 10px; font-size: .88rem; }
+.lgd-resa .lgd-gtab table { width: 100%; border-collapse: collapse; }
+.lgd-resa .lgd-gtab caption { text-align: left; font-weight: 800; padding: 0 2px 8px; }
+.lgd-resa .lgd-gtab th, .lgd-resa .lgd-gtab td { padding: 8px 6px; border-top: 1px solid #EFE9DD; text-align: center; vertical-align: middle; line-height: 1.3; }
+.lgd-resa .lgd-gtab thead th { border-top: 0; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: #5B6B68; }
+.lgd-resa .lgd-gtab tbody th { text-align: left; font-weight: 600; }
+.lgd-resa .lgd-gtab .g { background: #FEF3D6; font-weight: 800; color: #0E3B35; }
+.lgd-resa .lgd-gtab thead .g { color: #8A5A00; border-radius: 8px 8px 0 0; }
+.lgd-resa .lgd-gtab p { margin: 8px 2px 0; font-size: .8rem; color: #5B6B68; line-height: 1.4; }
+.lgd-resa .lgd-gtab p a { color: inherit; font-weight: 700; }
   .lgd-resa .lgd-total { margin: 4px 0 0; font-size: 1.3rem; font-weight: 800; }
   .lgd-resa .lgd-pay { min-height: 54px; border: 0; border-radius: 12px; background: var(--lgd-brand); color: #FFFFFF; font-weight: 700; font-size: 1.05rem; cursor: pointer; }
   .lgd-resa .lgd-pay:disabled { opacity: .6; cursor: wait; }
@@ -179,7 +189,8 @@ a{ color:#147566; }
 <div class="lgd-grid"><label>Nom<input name="nom" autocomplete="family-name" required></label><label>Prénom<input name="prenom" autocomplete="given-name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone mobile<input name="phone" type="tel" autocomplete="tel" required></label><label>Code promo <span class="lgd-opt">(facultatif)</span><input name="promoCode" autocomplete="off"></label></div>
 <div data-voyageurs style="display:flex;flex-direction:column;gap:14px"></div>
         <p class="lgd-info" data-id hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p>
-<label class="lgd-check lgd-garantie"><input type="checkbox" name="garantie"> <span><strong>Ajouter la garantie annulation : +5 € par voyageur</strong><small>Annulez sans justificatif jusqu’à 48 h avant le départ : nous vous remboursons 100 % du prix des places. Sans garantie, le remboursement dépend de la date d’annulation. <a href="../cgv-excursions/#article-8" target="_blank" rel="noopener">Voir les conditions</a></small></span></label>
+<label class="lgd-check lgd-garantie"><input type="checkbox" name="garantie"> <span><strong>Ajouter la garantie annulation&nbsp;: +5&nbsp;€ par voyageur</strong><small>Annulez sans justificatif jusqu’à 48 h avant le départ : nous vous remboursons 100 % du prix des places.</small></span></label>
+<div class="lgd-gtab" role="group" aria-label="Remboursement si vous annulez"><table><caption>Si vous annulez, vous êtes remboursé de&nbsp;:</caption><thead><tr><th scope="col">Vous annulez…</th><th scope="col">Sans garantie</th><th scope="col" class="g">Avec garantie</th></tr></thead><tbody><tr><th scope="row">Plus de 30 jours avant</th><td>100 % moins 5 € par voyageur</td><td class="g">100 %</td></tr><tr><th scope="row">De 30 à 15 jours avant</th><td>50 %</td><td class="g">100 %</td></tr><tr><th scope="row">De 14 jours à 48&nbsp;h avant</th><td>0 %</td><td class="g">100 %</td></tr><tr><th scope="row">Moins de 48&nbsp;h avant, ou absent au départ</th><td>0 %</td><td>0 %</td></tr></tbody></table><p>Pourcentages du prix des places payé. La garantie elle-même n’est pas remboursable, sauf si LGD Paris annule le départ. <a href="../cgv-excursions/#article-8" target="_blank" rel="noopener">Conditions générales, article 8</a></p></div>
 <label class="lgd-check"><input type="checkbox" name="acceptCgv" required> <span>J’accepte les <a href="../cgv-excursions/" target="_blank" rel="noopener">conditions générales de vente</a></span></label>
 <label class="lgd-check"><input type="checkbox" name="optOut"> <span>Je ne souhaite pas recevoir les offres d’excursions de LGD Paris par e-mail</span></label>
 <p class="lgd-total" data-total></p><p class="lgd-err" data-err hidden></p>
