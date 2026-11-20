@@ -386,6 +386,21 @@ p{ margin:0; }
 .lgd-resa .lgd-check input { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--lgd-brand); flex-shrink: 0; }
 .lgd-resa .lgd-when, .lgd-resa .lgd-info { margin: 0; padding: 10px 14px; border-radius: 12px; background: #EAF5F2; color: var(--lgd-brand); font-weight: 600; }
 .lgd-resa .lgd-info { background: #FCEFD9; color: #6B4000; font-weight: 500; }
+.lgd-resa .lgd-garantie { padding: 14px 16px; border: 2px solid var(--sun, #F8BA2F); border-radius: 14px; background: #FEF3D6; }
+.lgd-resa .lgd-garantie span { display: flex; flex-direction: column; gap: 4px; }
+.lgd-resa .lgd-garantie strong { font-weight: 800; }
+.lgd-resa .lgd-garantie small { font-size: .9rem; line-height: 1.45; color: #4A3A12; }
+.lgd-resa .lgd-garantie small a { color: inherit; font-weight: 700; }
+.lgd-resa .lgd-gtab { margin-top: -6px; border: 1px solid var(--lgd-line, #E3DCCF); border-radius: 14px; background: #FFFFFF; padding: 12px 12px 10px; font-size: .88rem; }
+.lgd-resa .lgd-gtab table { width: 100%; border-collapse: collapse; }
+.lgd-resa .lgd-gtab caption { text-align: left; font-weight: 800; padding: 0 2px 8px; }
+.lgd-resa .lgd-gtab th, .lgd-resa .lgd-gtab td { padding: 8px 6px; border-top: 1px solid #EFE9DD; text-align: center; vertical-align: middle; line-height: 1.3; }
+.lgd-resa .lgd-gtab thead th { border-top: 0; font-size: .78rem; text-transform: uppercase; letter-spacing: .04em; color: #5B6B68; }
+.lgd-resa .lgd-gtab tbody th { text-align: left; font-weight: 600; }
+.lgd-resa .lgd-gtab .g { background: #FEF3D6; font-weight: 800; color: #0E3B35; }
+.lgd-resa .lgd-gtab thead .g { color: #8A5A00; border-radius: 8px 8px 0 0; }
+.lgd-resa .lgd-gtab p { margin: 8px 2px 0; font-size: .8rem; color: #5B6B68; line-height: 1.4; }
+.lgd-resa .lgd-gtab p a { color: inherit; font-weight: 700; }
 .lgd-resa .lgd-total { margin: 4px 0 0; font-size: 1.3rem; font-weight: 800; }
 .lgd-resa .lgd-pay { min-height: 56px; border: 0; border-radius: 14px; background: var(--sun); color: #1E1A12; font: inherit; font-weight: 800; font-size: 1.1rem; cursor: pointer; box-shadow: 0 10px 24px -10px rgba(184,124,0,.75); transition: transform .2s; }
 .lgd-resa .lgd-pay:hover { transform: translateY(-2px); }
@@ -545,6 +560,8 @@ p{ margin:0; }
         <div class="lgd-grid"><label>Nom<input name="nom" autocomplete="family-name" required></label><label>Prénom<input name="prenom" autocomplete="given-name" required></label><label>E-mail<input name="email" type="email" autocomplete="email" required></label><label>Téléphone mobile<input name="phone" type="tel" autocomplete="tel" required></label><label>Code promo <span class="lgd-opt">(facultatif)</span><input name="promoCode" autocomplete="off"></label></div>
         <div data-voyageurs style="display:flex;flex-direction:column;gap:14px"></div>
         <p class="lgd-info" data-id hidden>Pièce d’identité ou passeport en cours de validité obligatoire pour chaque voyageur.</p>
+        <label class="lgd-check lgd-garantie"><input type="checkbox" name="garantie"> <span><strong>Ajouter la garantie annulation&nbsp;: +5&nbsp;€ par voyageur</strong><small>Annulez sans justificatif jusqu’à 48 h avant le départ : nous vous remboursons 100 % du prix des places.</small></span></label>
+<div class="lgd-gtab" role="group" aria-label="Remboursement si vous annulez"><table><caption>Si vous annulez, vous êtes remboursé de&nbsp;:</caption><thead><tr><th scope="col">Vous annulez…</th><th scope="col">Sans garantie</th><th scope="col" class="g">Avec garantie</th></tr></thead><tbody><tr><th scope="row">Plus de 30 jours avant</th><td>100 %</td><td class="g">100 %</td></tr><tr><th scope="row">De 30 à 15 jours avant</th><td>50 %</td><td class="g">100 %</td></tr><tr><th scope="row">De 14 jours à 48&nbsp;h avant</th><td>0 %</td><td class="g">100 %</td></tr><tr><th scope="row">Moins de 48&nbsp;h avant, ou absent au départ</th><td>0 %</td><td>0 %</td></tr></tbody></table><p>Pourcentages du prix des places payé. La garantie elle-même n’est pas remboursable, sauf si LGD Paris annule le départ. <a href="../cgv-excursions/#article-8" target="_blank" rel="noopener">Conditions générales, article 8</a></p></div>
         <label class="lgd-check"><input type="checkbox" name="acceptCgv" required> <span>J’accepte les <a href="../cgv-excursions/" target="_blank" rel="noopener">conditions générales de vente</a></span></label>
         <label class="lgd-check"><input type="checkbox" name="optOut"> <span>Je ne souhaite pas recevoir les offres d’excursions de LGD Paris par e-mail</span></label>
         <p class="lgd-total" data-total></p><p class="lgd-err" data-err hidden></p>
@@ -717,11 +734,13 @@ p{ margin:0; }
     sDep.innerHTML = deps.map(function(d){ return '<option value="' + esc(d.id) + '">' + esc(fmt(d.date)) + (d.remaining <= 10 ? ' · plus que ' + d.remaining + ' places' : '') + '</option>'; }).join('');
     function cur(){ return deps.filter(function(d){ return d.id === sDep.value; })[0]; }
     function count(){ return Math.min(Math.max(1, parseInt(qty.value, 10) || 1), Number(qty.max)); }
+    var GARANTIE = 5; // garantie annulation, € par voyageur (CGV article 8) ; le montant facturé est fixé par le serveur
+    function total(){ return count() * data.excursion.price + (form.elements.garantie.checked ? GARANTIE * count() : 0); }
     function upd(){
       var d = cur(), p = d.pickups.filter(function(x){ return x.id === sPk.value; })[0] || d.pickups[0];
       w.querySelector('[data-when]').textContent = when(d.date, p.time) + ' · ' + p.name + (p.address ? ', ' + p.address : '');
-      w.querySelector('[data-total]').textContent = 'Total : ' + euro(count() * data.excursion.price);
-      pay.textContent = 'Payer ' + euro(count() * data.excursion.price);
+      var g = form.elements.garantie.checked ? GARANTIE * count() : 0; w.querySelector('[data-total]').textContent = 'Total : ' + euro(total()) + (g ? ' (dont garantie annulation ' + euro(g) + ')' : '');
+      pay.textContent = 'Payer ' + euro(total());
     }
     function fill(){ var d = cur(); sPk.innerHTML = d.pickups.map(function(p){ return '<option value="' + esc(p.id) + '">' + esc(hh(p.time) + ' · ' + p.name) + '</option>'; }).join(''); qty.max = String(Math.min(10, d.remaining)); upd(); }
     var vbox = w.querySelector('[data-voyageurs]'), vsave = {};
@@ -740,14 +759,14 @@ p{ margin:0; }
     }
     vbox.addEventListener('change', function(e){ var i = e.target.getAttribute('data-i'); if(i === null) return; var own = vbox.querySelector('[data-own="' + i + '"]'); own.style.display = e.target.checked ? 'none' : ''; own.querySelectorAll('input').forEach(function(x){ x.required = !e.target.checked; }); });
     function voyageurs(){ var f = form.elements, out = [{ nom: f.nom.value.trim(), prenom: f.prenom.value.trim(), email: f.email.value.trim(), telephone: f.phone.value.trim() }]; for(var i = 1; i < count(); i++){ var s = f['same' + i].checked; out.push({ nom: f['nom' + i].value.trim(), prenom: f['prenom' + i].value.trim(), email: s ? f.email.value.trim() : f['email' + i].value.trim(), telephone: s ? f.phone.value.trim() : f['phone' + i].value.trim(), coordonneesReservant: s }); } return out; }
-    sDep.addEventListener('change', function(){ fill(); voy(); }); sPk.addEventListener('change', upd); qty.addEventListener('input', function(){ upd(); voy(); }); fill(); voy();
+    sDep.addEventListener('change', function(){ fill(); voy(); }); sPk.addEventListener('change', upd); qty.addEventListener('input', function(){ upd(); voy(); }); form.elements.garantie.addEventListener('change', upd); fill(); voy();
     form.addEventListener('submit', function(e){
       e.preventDefault(); err.hidden = true;
       if(!form.reportValidity()) return;
       pay.disabled = true; pay.textContent = 'Redirection vers le paiement…';
-      track('InitiateCheckout', 'InitiateCheckout', { content_ids:[slug], content_type:'product', value: count() * data.excursion.price, currency:'EUR', num_items: count() });
+      track('InitiateCheckout', 'InitiateCheckout', { content_ids:[slug], content_type:'product', value: total(), currency:'EUR', num_items: count() });
       var f = form.elements;
-      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: (f.prenom.value.trim() + ' ' + f.nom.value.trim()), voyageurs: voyageurs(), email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), pageUrl: location.origin + location.pathname };
+      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: (f.prenom.value.trim() + ' ' + f.nom.value.trim()), voyageurs: voyageurs(), email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, garantie: f.garantie.checked, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), pageUrl: location.origin + location.pathname };
       fetch(API + '/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body) })
         .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || 'Le paiement n’a pas pu démarrer. Réessayez.'); location.href = j.url; }); })
         .catch(function(e2){ err.textContent = e2.message || 'Le paiement n’a pas pu démarrer. Réessayez.'; err.hidden = false; pay.disabled = false; upd(); });
