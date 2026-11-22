@@ -264,7 +264,7 @@ a{ color:#147566; }
     function cur(){ return deps.filter(function(d){ return d.id === sDep.value; })[0]; }
     function count(){ return Math.min(Math.max(1, parseInt(qty.value, 10) || 1), Number(qty.max)); }
     var GARANTIE = 5; // garantie annulation, € par voyageur (CGV article 8) ; le montant facturé est fixé par le serveur
-    function total(){ return count() * data.excursion.price + (form.elements.garantie.checked ? GARANTIE * count() : 0); }
+    function total(){ var d = cur(), n = count(), e = d && d.price != null ? Math.min(n, d.earlyLeft || 0) : 0; return (d && d.price != null ? e * d.earlyPrice + (n - e) * d.fullPrice : n * data.excursion.price) + (form.elements.garantie.checked ? GARANTIE * n : 0); }
     function upd(){
       var d = cur(), p = d.pickups.filter(function(x){ return x.id === sPk.value; })[0] || d.pickups[0];
       w.querySelector('[data-when]').textContent = when(d.date, p.time) + ' · ' + p.name + (p.address ? ', ' + p.address : '');
