@@ -4,7 +4,7 @@
    - TikTok : TikTok Ads Manager > Outils > Événements > Web > votre pixel > « ID du pixel » (ex. CABC123...)
    Tant qu'un identifiant est vide, le pixel correspondant ne se charge pas. */
 var LGD_META_PIXEL_ID = '1457563953171051';
-var LGD_TIKTOK_PIXEL_ID = '';
+var LGD_TIKTOK_PIXEL_ID = 'DC2NASRC77U0FTGMN610';
 
 /* Consentement cookies (CNIL) : les pixels ne se chargent qu'apres « Accepter ».
    Le choix est garde 6 mois dans le navigateur du visiteur. */
