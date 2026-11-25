@@ -635,8 +635,15 @@ p{ margin:0; }
   var API = 'https://europe-west1-lgd-pilotage-excursions.cloudfunctions.net';
   var SRC_KEY = 'lgd_utm_source';
   var params = new URLSearchParams(location.search);
-  try { if(params.get('utm_source')) sessionStorage.setItem(SRC_KEY, params.get('utm_source')); } catch(e){}
+  // Suivi de la provenance (25/11/2026) : paramètres utm des liens de pub + site d'origine (bio Instagram/TikTok, Google…).
+  // Mêmes clés que le site principal www.lgdparis.com, qui les enregistre aussi dès l'arrivée du visiteur.
+  try {
+    if(params.get('utm_source')){ sessionStorage.setItem(SRC_KEY, params.get('utm_source')); sessionStorage.setItem('lgd_utm', JSON.stringify({ m: params.get('utm_medium') || '', c: params.get('utm_campaign') || '', t: params.get('utm_content') || '' })); }
+    if(!sessionStorage.getItem('lgd_ref') && document.referrer && document.referrer.indexOf(location.host) < 0) sessionStorage.setItem('lgd_ref', document.referrer.slice(0, 300));
+  } catch(e){}
   function src(){ try{ return sessionStorage.getItem(SRC_KEY) || ''; }catch(e){ return ''; } }
+  function utm(){ try{ return JSON.parse(sessionStorage.getItem('lgd_utm') || '{}') || {}; }catch(e){ return {}; } }
+  function ref(){ try{ return sessionStorage.getItem('lgd_ref') || ''; }catch(e){ return ''; } }
   function esc(v){ return String(v == null ? '' : v).replace(/[&<>"']/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
   function hh(t){ return t ? t.replace(':', 'h') : ''; }
   function euro(n){ return new Intl.NumberFormat('fr-FR', { style:'currency', currency:'EUR', maximumFractionDigits: Number.isInteger(n) ? 0 : 2 }).format(n); }
@@ -766,7 +773,7 @@ p{ margin:0; }
       pay.disabled = true; pay.textContent = 'Redirection vers le paiement…';
       track('InitiateCheckout', 'InitiateCheckout', { content_ids:[slug], content_type:'product', value: total(), currency:'EUR', num_items: count() });
       var f = form.elements;
-      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: (f.prenom.value.trim() + ' ' + f.nom.value.trim()), voyageurs: voyageurs(), email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, garantie: f.garantie.checked, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), pageUrl: location.origin + location.pathname };
+      var body = { departureId: f.departureId.value, pickupId: f.pickupId.value, qty: count(), name: (f.prenom.value.trim() + ' ' + f.nom.value.trim()), voyageurs: voyageurs(), email: f.email.value, phone: f.phone.value, promoCode: f.promoCode.value, garantie: f.garantie.checked, acceptCgv: f.acceptCgv.checked, optOut: f.optOut.checked, source: src(), utmMedium: utm().m || '', utmCampaign: utm().c || '', utmContent: utm().t || '', referrer: ref(), pageUrl: location.origin + location.pathname };
       fetch(API + '/checkout', { method:'POST', headers:{ 'Content-Type':'application/json' }, body: JSON.stringify(body) })
         .then(function(r){ return r.json().then(function(j){ if(!r.ok || !j.url) throw new Error(j.error || 'Le paiement n’a pas pu démarrer. Réessayez.'); location.href = j.url; }); })
         .catch(function(e2){ err.textContent = e2.message || 'Le paiement n’a pas pu démarrer. Réessayez.'; err.hidden = false; pay.disabled = false; upd(); });
